@@ -124,8 +124,10 @@ open class DropDown : UITextField{
     fileprivate func addGesture (){
         let gesture =  UITapGestureRecognizer(target: self, action:  #selector(touchAction))
         if isSearchEnable{
+            self.rightView?.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
             self.rightView?.addGestureRecognizer(gesture)
         }else{
+            self.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
             self.addGestureRecognizer(gesture)
         }
         
@@ -160,9 +162,9 @@ open class DropDown : UITextField{
         self.superview?.insertSubview(shadow, belowSubview: self)
         self.superview?.insertSubview(table, belowSubview: self)
         self.isSelected = true
-        UIView.animate(withDuration: 0.9,
+        UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       usingSpringWithDamping: 0.4,
+                       usingSpringWithDamping: 0.1,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseInOut,
                        animations: { () -> Void in
@@ -188,9 +190,9 @@ open class DropDown : UITextField{
     public func hideList() {
         
         TableWillDisappearCompletion()
-        UIView.animate(withDuration: 1.0,
-                       delay: 0.4,
-                       usingSpringWithDamping: 0.9,
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.1,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseInOut,
                        animations: { () -> Void in
@@ -221,9 +223,9 @@ open class DropDown : UITextField{
         }else{
             self.tableheightX = listHeight
         }
-        UIView.animate(withDuration: 0.2,
+        UIView.animate(withDuration: 0.1,
                        delay: 0.1,
-                       usingSpringWithDamping: 0.9,
+                       usingSpringWithDamping: 0.1,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseInOut,
                        animations: { () -> Void in
