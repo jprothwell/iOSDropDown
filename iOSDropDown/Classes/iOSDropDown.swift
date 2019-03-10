@@ -224,7 +224,7 @@ open class DropDown : UITextField{
             self.tableheightX = listHeight
         }
         UIView.animate(withDuration: 0.1,
-                       delay: 0.1,
+                       delay: 0,
                        usingSpringWithDamping: 0.1,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseInOut,
