@@ -21,7 +21,7 @@ open class DropDown : UITextField{
     
    @IBInspectable public var rowHeight: CGFloat = 30
    @IBInspectable public var rowBackgroundColor: UIColor = .white
-   @IBInspectable public var selectedRowColor: UIColor = .cyan
+   @IBInspectable public var selectedRowColor: UIColor = .white
    @IBInspectable public var hideOptionsWhenSelect = true
    @IBInspectable  public var isSearchEnable: Bool = true {
         didSet{
@@ -335,7 +335,7 @@ extension DropDown: UITableViewDelegate {
         selectedIndex = (indexPath as NSIndexPath).row
         let selectedText = self.dataArray[self.selectedIndex!]
         tableView.cellForRow(at: indexPath)?.alpha = 0
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.1,
                        animations: { () -> Void in
                         tableView.cellForRow(at: indexPath)?.alpha = 1.0
                         tableView.cellForRow(at: indexPath)?.backgroundColor = self.selectedRowColor
