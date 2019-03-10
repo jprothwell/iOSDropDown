@@ -122,12 +122,13 @@ open class DropDown : UITextField{
         addGesture()
     }
     fileprivate func addGesture (){
+        self.rightView?.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
+        self.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
+        
         let gesture =  UITapGestureRecognizer(target: self, action:  #selector(touchAction))
         if isSearchEnable{
-            self.rightView?.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
             self.rightView?.addGestureRecognizer(gesture)
         }else{
-            self.gestureRecognizers?.forEach({$0.view?.removeGestureRecognizer($0)})
             self.addGestureRecognizer(gesture)
         }
         
