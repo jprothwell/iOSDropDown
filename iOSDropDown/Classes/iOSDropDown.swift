@@ -163,27 +163,19 @@ open class DropDown : UITextField{
         self.superview?.insertSubview(shadow, belowSubview: self)
         self.superview?.insertSubview(table, belowSubview: self)
         self.isSelected = true
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       usingSpringWithDamping: 0.1,
-                       initialSpringVelocity: 0.1,
-                       options: .curveEaseInOut,
-                       animations: { () -> Void in
-                        
-                        self.table.frame = CGRect(x: self.frame.minX,
-                                                  y: self.frame.maxY+5,
-                                                  width: self.frame.width,
-                                                  height: self.tableheightX)
-                        
-                        self.table.alpha = 1
-                        self.shadow.frame = self.table.frame
-                        self.shadow.dropShadow()
-                        self.arrow.position = .up
-                        
-        },
-                       completion: { (finish) -> Void in
-                        
-        })
+        UIView.animate(withDuration: 0.3, animations: {
+            self.table.frame = CGRect(x: self.frame.minX,
+                                      y: self.frame.maxY+5,
+                                      width: self.frame.width,
+                                      height: self.tableheightX)
+            
+            self.table.alpha = 1
+            self.shadow.frame = self.table.frame
+            self.shadow.dropShadow()
+            self.arrow.position = .up
+        }) { (finish) in
+            
+        }
         
     }
     
@@ -191,27 +183,26 @@ open class DropDown : UITextField{
     public func hideList() {
         
         TableWillDisappearCompletion()
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       usingSpringWithDamping: 0.1,
-                       initialSpringVelocity: 0.1,
-                       options: .curveEaseInOut,
-                       animations: { () -> Void in
-                        self.table.frame = CGRect(x: self.frame.minX,
-                                                  y: self.frame.minY,
-                                                  width: self.frame.width,
-                                                  height: 0)
-                        self.shadow.alpha = 0
-                        self.shadow.frame = self.table.frame
-                        self.arrow.position = .down
-        },
-                       completion: { (didFinish) -> Void in
-                        
-                        self.shadow.removeFromSuperview()
-                        self.table.removeFromSuperview()
-                        self.isSelected = false
-                        self.TableDidDisappearCompletion()
-        })
+        UIView.animate(withDuration: 0.3, animations: {
+            self.table.frame = CGRect(x: self.frame.minX,
+                                      y: self.frame.maxY+5,
+                                      width: self.frame.width,
+                                      height: self.tableheightX)
+            
+            self.table.frame = CGRect(x: self.frame.minX,
+                                      y: self.frame.minY,
+                                      width: self.frame.width,
+                                      height: 0)
+            self.shadow.alpha = 0
+            self.shadow.frame = self.table.frame
+            self.arrow.position = .down
+        }) { (finish) in
+            self.shadow.removeFromSuperview()
+            self.table.removeFromSuperview()
+            self.isSelected = false
+            self.TableDidDisappearCompletion()
+        }
+
     }
     
     @objc public func touchAction() {
